@@ -3,9 +3,9 @@
 ## usersテーブル
 
 | Column             | Type   | Options                  |
-| ------------------ | ------ | -----------              |
+| ------------------ | ------ | ------------------------ |
 | nickname           | string | null: false              |
-| email              | string | unique:true ,null: false |
+| email              | string | null: false ,unique:true |
 | encrypted_password | string | null: false              |
 | first_name         | string | null: false              |
 | last_name          | string | null: false              |
@@ -23,49 +23,49 @@
 
 ## itemsテーブル
 
-| Column             | Type       | Options                 |
-| ------------------ | ---------- | ----------------------- |
-| name               | string     | null: false             |
-| text               | text       | null: false             |
-| price              | integer    | null: false             |
-| category_id        | integer    | null: false             |
-| condition_id       | integer    | null: false             |
-| pay_for_sipping_id | integer    | null: false             |
-| Shipment_source_id | integer    | null: false             |
-| day_id             | integer    | null: false             |
-| user               | references | null: foreign_key: true |
+| Column             | Type       | Options                       |
+| ------------------ | ---------- | ----------------------------- |
+| name               | string     | null: false                   |
+| text               | text       | null: false                   |
+| price              | integer    | null: false                   |
+| category_id        | integer    | null: false                   |
+| condition_id       | integer    | null: false                   |
+| pay_for_sipping_id | integer    | null: false                   |
+| prefecture_id      | integer    | null: false                   |
+| day_id             | integer    | null: false                   |
+| user               | references | null: false,foreign_key: true |
 
 
 ### Association
 
 - belongs_to :user
-- belongs_to :order
+- has_one  :order
 - has_many :comments
 - has_many :messages
 
 ## sipping_addressテーブル
 
-| Column             | Type       | Options                 |
-| ------------------ | ---------- | ----------------------- |
-| post_code          | string     | null: false             |
-| Shipment_source    | string     | null: false             |
-| city               | string     | null: false             |
-| address            | string     | null: false             |
-| buillding_name     | string     |                         |
-| phone_number       | string     | null:false              |
-| order              | references | null: foreign_key: true |
+| Column             | Type       | Options                       |
+| ------------------ | ---------- | ----------------------------- |
+| post_code          | string     | null: false                   |
+| prefecture_id      | integer    | null: false                   |
+| city               | string     | null: false                   |
+| address            | string     | null: false                   |
+| buillding_name     | string     |                               |
+| phone_number       | string     | null:false                    |
+| order              | references | null: false,foreign_key: true |
 
 
 ### Association
-- has_one_attached :order
+- has_one :order
 
 ## commentsテーブル
 
-| Column             | Type       | Options                 |
-| ------------------ | ---------- | ----------------------- |
-| text               | text       | null: false             |
-| item               | references | null: foreign_key: true |
-| user               | references | null: foreign_key: true |
+| Column             | Type       | Options                       |
+| ------------------ | ---------- | ----------------------------- |
+| text               | text       | null: false                   |
+| item               | references | null: false,foreign_key: true |
+| user               | references | null: false,foreign_key: true |
 
 ### Association
 
@@ -74,11 +74,11 @@
 
 ## messagesテーブル
 
-| Column             | Type       | Options                 |
-| ------------------ | ---------- | ----------------------- |
-| text               | text       | null: false             |
-| item               | references | null: foreign_key: true |
-| user               | references | null: foreign_key: true |
+| Column             | Type       | Options                       |
+| ------------------ | ---------- | ----------------------------- |
+| text               | text       | null: false                   |
+| item               | references | null: false,foreign_key: true |
+| user               | references | null: false,foreign_key: true |
 
 ### Association
 
@@ -87,13 +87,13 @@
 
 ## ordersテーブル
 
-| Column             | Type       | Options                 |
-| ------------------ | ---------- | ----------------------- |
-| item               | references | null: foreign_key: true |
-| user               | references | null: foreign_key: true |
+| Column             | Type       | Options                       |
+| ------------------ | ---------- | ----------------------------- |
+| item               | references | null: false,foreign_key: true |
+| user               | references | null: false,foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
-- has_one_attached :sipping_address
+- has_one :sipping_address
