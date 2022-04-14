@@ -4,19 +4,21 @@
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| password           | string | null: false |
 | nickname           | string | null: false |
+| email              | string | unique:true |
+| encrypted_password | string | null: false |
 | first_name         | string | null: false |
 | last_name          | string | null: false |
-| phone_num          | integer| null: false |
-| email              | string | null: false |
+| last_name_kana     | string | null: false |
+| first_name_kana    | string | null: false |
+| birth_day          | integer| null: false |
 | user_image         | string |             |
 | introduction       | text   |             |
 
 ### Association
 
 - belongs_to :sipping_address
-- belongs_to :orders
+- has_many :orders
 - has_many :items
 - has_many :comments
 - has_many :messages
@@ -29,17 +31,18 @@
 | name               | string     | null: false             |
 | text               | text       | null: false             |
 | price              | integer    | null: false             |
-| category_id        | references | null: foreign_key: true |
-| image              | string     | null: false             |
-| user_id            | references | null: foreign_key: true |
-| condition          | string     | null: false             |
+| category_id        | integer    | null: false             |
+| condition_id       | integer    | null: false             |
+| pay_for_sipping_id | integer    | null: false             |
+| Shipment source_id | integer    | null: false             |
+| day_id             | integer    | null: false             |
+| user               | references | null: foreign_key: true |
 
 
 ### Association
 
 - belongs_to :users
-- belongs_to :categorys
-- belongs_to :orgers
+- belongs_to :orders
 - has_many :comments
 - has_many :messages
 
@@ -47,28 +50,27 @@
 
 | Column             | Type       | Options                 |
 | ------------------ | ---------- | ----------------------- |
-| nickname           | string     | null: false             |
-| first_name         | string     | null: false             |
-| last_name          | string     | null: false             |
-| phone_num          | integer    | null: false             |
 | post_code          | integer    | null: false             |
 | prefecture         | string     | null: false             |
 | city               | string     | null: false             |
 | address            | string     | null: false             |
 | buillding_name     | string     |                         |
-| user_id            | references | null: foreign_key: true |
+| phone_number       | integer    | null:false              |
+| user               | references | null: foreign_key: true |
+| order              | references | null: foreign_key: true |
 
 
 ### Association
 - belongs_to :users
+- belongs_to :orders
 
 ## commentsテーブル
 
 | Column             | Type       | Options                 |
 | ------------------ | ---------- | ----------------------- |
 | text               | text       | null: false             |
-| item_id            | references | null: foreign_key: true |
-| user_id            | references | null: foreign_key: true |
+| item               | references | null: foreign_key: true |
+| user               | references | null: foreign_key: true |
 
 ### Association
 
@@ -80,22 +82,23 @@
 | Column             | Type       | Options                 |
 | ------------------ | ---------- | ----------------------- |
 | text               | text       | null: false             |
-| item_id            | references | null: foreign_key: true |
-| user_id            | references | null: foreign_key: true |
+| item               | references | null: foreign_key: true |
+| user               | references | null: foreign_key: true |
 
 ### Association
 
 - belongs_to :users
 - belongs_to :items
 
-## categorysテーブル
+## ordersテーブル
 
 | Column             | Type       | Options                 |
 | ------------------ | ---------- | ----------------------- |
-| name               | string     | null: false             |
-
+| item               | references | null: foreign_key: true |
+| user               | references | null: foreign_key: true |
 
 ### Association
 
+- belongs_to :users
 - belongs_to :items
-
+- belongs_to :sipping_address
