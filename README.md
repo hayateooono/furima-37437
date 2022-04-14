@@ -26,13 +26,13 @@
 | Column             | Type       | Options                       |
 | ------------------ | ---------- | ----------------------------- |
 | name               | string     | null: false                   |
-| text               | text       | null: false                   |
+| info               | text       | null: false                   |
 | price              | integer    | null: false                   |
 | category_id        | integer    | null: false                   |
 | condition_id       | integer    | null: false                   |
 | pay_for_sipping_id | integer    | null: false                   |
 | prefecture_id      | integer    | null: false                   |
-| day_id             | integer    | null: false                   |
+| shipping_day_id    | integer    | null: false                   |
 | user               | references | null: false,foreign_key: true |
 
 
@@ -43,7 +43,7 @@
 - has_many :comments
 - has_many :messages
 
-## sipping_addressテーブル
+## shipping_addressテーブル
 
 | Column             | Type       | Options                       |
 | ------------------ | ---------- | ----------------------------- |
@@ -96,4 +96,4 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one :sipping_address
+- has_one :shipping_address
