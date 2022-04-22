@@ -132,7 +132,7 @@
       <% if @items.present? %>
       <% @items.each do |item| %>
       <li class='list'>
-        <%= link_to item_path(item.id) do %>
+        <%= link_to "#" do %>
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" %>
 
@@ -160,7 +160,6 @@
       <% end %>
       
 
-      <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
       
       <% else %>
       <li class='list'>
@@ -182,7 +181,6 @@
       </li>
       <% end %>
       
-      <%# //商品がない場合は以下のダミー商品が表示されるようにしましょう %>
     </ul>
   </div>
   <%# /商品一覧 %>
