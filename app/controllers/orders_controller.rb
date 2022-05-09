@@ -1,10 +1,15 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  #before_action :move_to_index,only: [:index]
   
   def index
     @order_address = OrderAddress.new
     @item = Item.find(params[:item_id])
-    if current_user == @item.user
+    if current_user == @item.user.id
+      redirect_to root_path
+    end
+
+    if @item.user_id == current_user.id || @item.order != nil
       redirect_to root_path
     end
   end
@@ -37,4 +42,5 @@ class OrdersController < ApplicationController
         currency: 'jpy'
       )
     end
+
 end
