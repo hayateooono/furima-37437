@@ -9,6 +9,7 @@ class OrderAddress
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: "は10桁以上11桁以内の半角数値にしてください" }
     validates :prefecture_id, numericality:{other_than: 0}
     validates :user_id
+    validates :item_id
     validates :token
   end
 
